@@ -19,11 +19,45 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.window.showInformationMessage('Adits World says Hello!');
 	});
 
-	let getTime = vscode.commands.registerCommand('lc3-visualization.getTime', () => {
-		let dateTime = new Date();
-		vscode.window.showInformationMessage(dateTime.toLocaleString());
-	});
+	let getText = vscode.commands.registerCommand('lc3-visualization.getText', () => {
+		// activeTextEditor gets the current editor that is open. gets the particular file too of the current directory.
+		// need to check if something is even open, otherwise the value is null
+		let activeEditor = vscode.window.activeTextEditor;
+		if (!activeEditor) {
+			vscode.window.showInformationMessage('active editor is null!')
+			return;
+		}
+		// get the entire document's content as a string text (file user has opened, not all at once)
+		let text = activeEditor.document.getText();
+		console.log(text);
 
+		// gets the number of lines in the document (includes empty lines)
+		let lineCount = activeEditor.document.lineCount;
+		console.log(lineCount);
+
+		// get entire file system path
+		let fileName = activeEditor.document.fileName;
+		console.log(fileName);
+		// output: /Users/aditshetty/testing_folder/SecondaryWorld.java
+
+
+		// for loop that goes line by line of the entire document and prints out each line
+		for (let lineNumber = 0; lineNumber < lineCount; lineNumber++) {
+			let line = activeEditor.document.lineAt(lineNumber);
+			console.log(line);
+		}
+
+		/*
+			output:
+			C {a: 0, b: 'public class SecondaryWorld {', c: false}
+			C {a: 1, b: '    public static void main(String[] args) {', c: false}
+			C {a: 2, b: '        System.out.println("Hello 2nd world!");', c: false}
+			C {a: 3, b: '    }', c: false}
+			C {a: 4, b: '}', c: false}
+			C {a: 5, b: '', c: true}
+		*/
+		
+	});
 
 	context.subscriptions.push(disposable);
 }

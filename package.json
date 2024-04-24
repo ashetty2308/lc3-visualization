@@ -18,8 +18,8 @@
         "title": "Hello World"
       }, 
       {
-        "command": "lc3-visualization.getTime",
-        "title": "Got Time?"
+        "command": "lc3-visualization.getText",
+        "title": "Get Text"
       }
     ]
   },
