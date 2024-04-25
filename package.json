@@ -20,6 +20,10 @@
       {
         "command": "lc3-visualization.getText",
         "title": "Get Text"
+      },
+      {
+        "command": "lc3-visualization.addComment",
+        "title": "Add Comment"
       }
     ]
   },

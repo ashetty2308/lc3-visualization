@@ -56,7 +56,22 @@ export function activate(context: vscode.ExtensionContext) {
 			C {a: 4, b: '}', c: false}
 			C {a: 5, b: '', c: true}
 		*/
-		
+	});
+	
+	let addComment = vscode.commands.registerCommand('lc3-visualization.addComment', () => {
+		let activeEditor = vscode.window.activeTextEditor;
+		if (!activeEditor) {
+			vscode.window.showInformationMessage('active editor is null!')
+			return;
+		}
+		const commentBlock = [
+			';;;;;;;;;;;;;;;;;',
+			';; ADD COMMENT ;;',
+			';;;;;;;;;;;;;;;;;'
+		]
+		activeEditor.edit(editBuilder => {
+			editBuilder.insert(activeEditor.selection.active, commentBlock.join('\n'));
+		});
 	});
 
 	context.subscriptions.push(disposable);
