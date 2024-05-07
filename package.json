@@ -14,20 +14,12 @@
   "contributes": {
     "commands": [
       {
-        "command": "lc3-visualization.helloWorld",
-        "title": "Hello World"
-      },
-      {
-        "command": "lc3-visualization.getText",
-        "title": "Get Text"
+        "command": "lc3-visualization.webview",
+        "title": "Web View"
       },
       {
         "command": "lc3-visualization.addComment",
         "title": "Add Comment"
-      },
-      {
-        "command": "lc3-visualization.reactJs",
-        "title": "Frontend Test"
       }
     ]
   },
