@@ -1,6 +1,8 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import * as path from 'path';
+import MyComponent from './my_component';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -74,7 +76,28 @@ export function activate(context: vscode.ExtensionContext) {
 		});
 	});
 
-	context.subscriptions.push(disposable);
+	// context.subscriptions.push(disposable);
+
+
+	let reactJs = vscode.commands.registerCommand('lc3-visualization.reactJs', () => {
+		// Create a new webview panel
+		const panel = vscode.window.createWebviewPanel(
+			'myExtension',
+			'My Extension',
+			vscode.ViewColumn.One,
+			{}
+		);
+	
+		// Get the HTML content to render your React component
+		const reactHtml = `<div id="root"></div>`;
+	
+		// Set the HTML content of the webview panel
+		panel.webview.html = reactHtml;
+	});
+	
+	// Register the command
+	// context.subscriptions.push(disposable);
+	
 }
 
 // This method is called when your extension is deactivated
