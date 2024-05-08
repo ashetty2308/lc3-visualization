@@ -12,7 +12,6 @@ export function activate(context: vscode.ExtensionContext) {
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "lc3-visualization" is now active!');
-	let x = 5;
 
 	let addComment = vscode.commands.registerCommand('lc3-visualization.addComment', () => {
 		let activeEditor = vscode.window.activeTextEditor;
@@ -40,8 +39,6 @@ export function activate(context: vscode.ExtensionContext) {
 		registersContained.forEach(register => {
 			commentBlock += `\n;; ${register} : `;
 		})
-
-
 
 		activeEditor.selection = new vscode.Selection(commentPosition, commentPosition);
 		activeEditor.edit(editBuilder => {
@@ -90,16 +87,16 @@ export function activate(context: vscode.ExtensionContext) {
 		
 		for (let lineNumber = 0; lineNumber < lineCount; lineNumber++) {
 			let eachLine = activeEditor.document.lineAt(lineNumber);
-			if (eachLine.text.trim().startsWith(';')) {
+			if (eachLine.text.trim().startsWith(';') && !eachLine.text.trim().startsWith(';;**')) {
 				let registerNumber = eachLine.text.substring(2, eachLine.text.indexOf(":")).trim();
 				let registerDescriptions = eachLine.text.substring(eachLine.text.indexOf(":") + 1).trim();
-				registerDictionary[registerNumber as keyof typeof registerDictionary] = registerDescriptions;
+				if (registerDescriptions !== "n/a") {
+					registerDictionary[registerNumber as keyof typeof registerDictionary] = registerDescriptions;
+				}
 			}
 		}
 
 		console.log(registerDictionary);
-
-
 
 		panel.webview.html = `<!DOCTYPE html>
 			<html lang="en">
